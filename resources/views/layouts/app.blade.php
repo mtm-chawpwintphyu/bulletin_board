@@ -22,7 +22,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="{{ url('/home') }}">
                     {{ config('Bulletin_Board', 'Bulletin_Board') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -36,11 +36,11 @@
                     <ul class="navbar-nav me-auto">
                         <!-- Users link -->
                         <li class="nav-item">
-                            <a class="nav-link">{{ __('Users') }}</a>
+                            <a class="nav-link" href="{{ route('users.index') }}">{{ __('Users') }}</a>
                         </li>
                         <!-- Posts link -->
                         <li class="nav-item">
-                            <a class="nav-link">{{ __('Posts') }}</a>
+                            <a class="nav-link" href="{{ route('posts.index') }}">{{ __('Posts') }}</a>
                         </li>
                     </ul>
 
@@ -48,7 +48,7 @@
                     <ul class="navbar-nav ms-auto">
                         <!-- Create User link -->
                         <li class="nav-item">
-                            <a class="nav-link">{{ __('Create User') }}</a>
+                            <a class="nav-link" href="{{ route('users.create') }}">{{ __('Create User') }}</a>
                         </li>
                         <!-- Authentication Links -->
                         @guest
@@ -83,7 +83,7 @@
                                     <!-- Logout link -->
                                     <li>
                                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                   document.getElementById('logout-form').submit();">
+                                                                       document.getElementById('logout-form').submit();">
                                             {{ __('Logout') }}
                                         </a>
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST"
@@ -103,19 +103,20 @@
             @yield('content')
         </main>
         <!-- Footer -->
-        <footer class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <div class="bg-white text-success py-3 shadow-sm">
             <div class="container">
-                <div class="row">
-                    <div class="col-md-6">
-                        <a href="http://seattleconsultingmyanmar.com/" class="text-muted">Seattle Consulting Myanmar</a>
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <a href="http://seattleconsultingmyanmar.com" class="text-decoration-none text-success">Seattle
+                            Consulting Myanmar</a>
                     </div>
-                    <div class="col-md-6">
-                        <label class="text-muted">Copyright &copy; Seattle Consulting
-                            Myanmar Co., Ltd. All rights reserved. </label>
+                    <div class="text-end">
+                        <label>Copyright &copy; Seattle Consulting Myanmar Co., Ltd. All rights reserved.</label>
                     </div>
                 </div>
             </div>
-        </footer>
+        </div>
+
     </div>
 </body>
 
