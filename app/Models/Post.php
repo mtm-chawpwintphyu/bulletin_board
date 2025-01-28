@@ -9,6 +9,11 @@ class Post extends Model
 {
     use HasFactory;
 
-    // Add the columns that you can mass-assign
+
     protected $fillable = ['title', 'content'];
+
+    public function creator() {
+        return $this->belongsTo(User::class, 'create_user_id');
+    }   
+    
 }

@@ -10,6 +10,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
+        
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->string('title')->unique();
@@ -18,11 +19,21 @@ return new class extends Migration {
             $table->foreignId('create_user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('updated_user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('deleted_user_id')->nullable()->constrained('users')->onDelete('set null');
-            $table->dateTime('createtd_at');
-            $table->dateTime('updated_at');
-            $table->dateTime('deleted_at');
+            $table->timestamps();
+            $table->dateTime('deleted_at')->nullable();
 
         });
+        DB::table('posts')->insert([
+            'title' => 'Post Title 01',
+            'description' => 'Description 01.',
+            'status' => 1,
+            'create_user_id' => 1, 
+            'updated_user_id' => 1,
+            'deleted_user_id' => null,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        
          
     }
 
