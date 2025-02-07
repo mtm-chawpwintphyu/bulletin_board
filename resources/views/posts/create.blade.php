@@ -14,7 +14,7 @@
                     <div class="col-md-4">
                         <input type="text" name="title" id="title"
                             class="form-control @error('title') is-invalid @enderror"
-                            value="{{ $title ?? old('title') }}">
+                            value="{{ old('title', request()->query('title')) }}">
                         @error('title')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -26,7 +26,7 @@
                     <label for="description" class="col-md-4 col-form-label text-md-end">Description</label>
                     <div class="col-md-4">
                         <textarea name="description" id="description"
-                            class="form-control @error('description') is-invalid @enderror">{{ $description ?? old('description') }}</textarea>
+                            class="form-control @error('description') is-invalid @enderror">{{ old('description', request()->query('description')) }}</textarea>
                         @error('description')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

@@ -14,7 +14,6 @@
                             {{ session('success') }}
                         </div>
                     @endif
-                    <!-- Search Form -->
                     <form action="{{ route('posts.index') }}" method="GET"
                         class="d-flex align-items-center py-3 justify-content-end" style="gap: 1rem;">
                         <label for="keyword" class="mr-10">Keyword: </label>
@@ -23,14 +22,12 @@
                         <button type="submit" name="search" class="btn btn-success">Search</button>
                     </form>
 
-                    <!-- Action Buttons (Create, Upload, Download) -->
                     <div class="d-flex align-items-center py-3 justify-content-end" style="gap: 1rem;">
                         <a href="{{ route('posts.create') }}" class="btn btn-primary" method="GET">Create</a>
                         <button type="button" class="btn btn-success">Upload</button>
                         <button type="button" class="btn btn-info">Download</button>
                     </div>
 
-                    <!-- Post Table -->
                     <table class="table table-striped table-hover">
                         <thead>
                             <tr class="table-success text-white">
@@ -44,29 +41,38 @@
                         <tbody class="table-group-divider">
                             @forelse ($posts as $post)
                                 <tr>
-                                    <td>{{ $post->title }}</td>
+                                    <td>
+                                        <a href="javascript:void(0);" class="post-title text-decoration-none" data-post-id="{{ $post->id }}"
+                                            data-post-title="{{ $post->title }}"
+                                            data-post-description="{{ $post->description }}"
+                                            data-post-status="{{ $post->status }}"
+                                            data-post-created-by="{{ $post->creator->name ?? 'Unknown' }}"
+                                            data-post-created-at="{{ $post->created_at->format('d M, Y') }}"
+                                            data-post-updated-by="{{ $post->updater->name ?? 'Unknown' }}"
+                                            data-post-updated-at="{{ $post->updated_at->format('d M, Y') }}">
+                                            {{ $post->title }}
+                                        </a>
+                                    </td>
                                     <td>{{ $post->description }}</td>
                                     <td>{{ $post->creator->name ?? 'Unknown' }}</td>
                                     <td>{{ $post->created_at->format('d M, Y') }}</td>
                                     <td>
-                                        <!-- Edit Button -->
                                         <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-warning">Edit</a>
-                                        <!-- Delete Button -->
-                                        <form action="{{ route('posts.destroy', $post->id) }}" method="POST"
-                                            class="d-inline">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger">Delete</button>
-                                        </form>
+                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                            data-bs-target="#deleteModal" data-post-id="{{ $post->id }}"
+                                            data-post-title="{{ $post->title }}"
+                                            data-post-description="{{ $post->description }}"
+                                            data-post-status="{{ $post->status }}" writingsuggestions="on">
+                                            Delete
+                                        </button>
                                     </td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="5">No posts found.</td>
+                                    <td colspan="5">No data availabel in this table.</td>
                                 </tr>
                             @endforelse
                         </tbody>
-
                     </table>
 
                     <div class="d-flex justify-content-between">
@@ -77,7 +83,6 @@
                         <div>
                             <nav>
                                 <ul class="pagination">
-
                                     @if ($posts->onFirstPage())
                                         <li class="page-item disabled">
                                             <span class="page-link">Previous</span>
@@ -109,6 +114,94 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- delete modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content rounded-3 shadow-lg">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title" id="deleteModalLabel">Delete Confirmation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p class="lead">Are you sure to delete the post?</p>
+                <div class="row mb-3">
+                    <div class="col-4"><strong>ID:</strong></div>
+                    <div class="col-8"><span id="postId" class="text-danger"></span></div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-4"><strong>Title:</strong></div>
+                    <div class="col-8"><span id="postTitle" class="text-danger"></span></div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-4"><strong>Description:</strong></div>
+                    <div class="col-8"><span id="postDescription" class="text-danger"></span></div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-4"><strong>Status:</strong></div>
+                    <div class="col-8"><span id="postStatus" class="text-danger"></span></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <form id="deleteForm" action="" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Post Details Modal -->
+<div class="modal fade" id="postDetailsModal" tabindex="-1" aria-labelledby="postDetailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content rounded-3 shadow-lg">
+            <div class="modal-header bg-info text-white">
+                <h5 class="modal-title" id="postDetailsModalLabel">Post Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row mb-3">
+                    <div class="col-4"><strong>ID:</strong></div>
+                    <div class="col-8"><span id="modalPostId" class="text-danger"></span></div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-4"><strong>Title:</strong></div>
+                    <div class="col-8"><span id="modalPostTitle" class="text-danger"></span></div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-4"><strong>Description:</strong></div>
+                    <div class="col-8"><span id="modalPostDescription" class="text-danger"></span></div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-4"><strong>Status:</strong></div>
+                    <div class="col-8"><span id="modalPostStatus" class="text-danger"></span></div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-4"><strong>Created By:</strong></div>
+                    <div class="col-8"><span id="modalPostCreatedBy" class="text-danger"></span></div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-4"><strong>Created At:</strong></div>
+                    <div class="col-8"><span id="modalPostCreatedAt" class="text-danger"></span></div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-4"><strong>Updated By:</strong></div>
+                    <div class="col-8"><span id="modalPostUpdatedBy" class="text-danger"></span></div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-4"><strong>Updated At:</strong></div>
+                    <div class="col-8"><span id="modalPostUpdatedAt" class="text-danger"></span></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>

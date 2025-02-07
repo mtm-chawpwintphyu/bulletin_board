@@ -3,32 +3,33 @@
 @section('content')
 <div class="container">
     <div class="card">
-        <div class="card-header bg-warning text-white">
-            {{ __('Confirm Post Creation') }}
+        <div class="card-header bg-info text-white">
+            {{ __('Confirm Post') }}
         </div>
         <div class="card-body">
-            <div class="row mb-3">
-                <label for="title" class="col-md-4 col-form-label text-md-end">Title</label>
-                <div class="col-md-4">
-                    <input type="text" name="title" id="title" class="form-control" value="{{ $title }}" readonly>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <label for="description" class="col-md-4 col-form-label text-md-end">Description</label>
-                <div class="col-md-4">
-                    <textarea name="description" id="description" class="form-control" readonly>{{ $description }}</textarea>
-                </div>
-            </div>
-
-            <form action="{{ route('posts.storeFinal') }}" method="POST">
+            <form action="{{ route('posts.store') }}" method="POST">
                 @csrf
-                <button type="submit" class="btn btn-success">Confirm</button>
-                <a href="{{ route('posts.create') }}" class="btn btn-danger">Cancel</a>
-            </form>
+                <div class="row mb-3">
+                    <label for="title" class="col-md-4 col-form-label text-md-end">Title</label>
+                    <div class="col-md-4">
+                        <input type="text" name="title" id="title" class="form-control" value="{{ $title }}" readonly>
+                    </div>
+                </div>
 
-        </div>
-        <div class="card-footer d-flex justify-content-end">
-            <a href="{{ route('posts.index') }}" class="btn btn-primary">Back to Post List</a>
+                <div class="row mb-3">
+                    <label for="description" class="col-md-4 col-form-label text-md-end">Description</label>
+                    <div class="col-md-4">
+                        <textarea name="description" id="description" class="form-control"
+                            readonly>{{ $description }}</textarea>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-center mt-3">
+                    <button type="submit" class="btn btn-success me-2">Confirm Post</button>
+                    <a href="{{ route('posts.create', ['title' => $title, 'description' => $description]) }}"
+                        class="btn btn-secondary">Cancel</a>
+                </div>
+            </form>
         </div>
     </div>
 </div>

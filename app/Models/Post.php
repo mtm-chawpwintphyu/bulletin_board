@@ -19,6 +19,10 @@ class Post extends Model
 
     public function creator() {
         return $this->belongsTo(User::class, 'create_user_id');
-    }   
+    } 
+    public function updater()
+{
+    return $this->belongsTo(User::class, 'updated_user_id');
+}  
     
 }

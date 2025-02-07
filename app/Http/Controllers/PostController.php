@@ -15,101 +15,106 @@ class PostController extends Controller
             ->when($keyword, function ($query, $keyword) {
                 return $query->where('title', 'like', "%$keyword%")
                     ->orWhere('description', 'like', "%$keyword%");
-            })->paginate(5);  // Paginate the results
+            })->paginate(5);
 
         return view('posts.index', compact('posts', 'keyword'));
     }
 
     public function create(Request $request)
     {
-        return view('posts.create');
+        $title = $request->query('title', old('title'));
+        $description = $request->query('description', old('description'));
+
+        return view('posts.create', compact('title', 'description'));
+    }
+
+    public function confirm(Request $request)
+    {
+
+        $validated = $request->validate([
+            'title' => 'required|max:255|unique:posts,title',
+            'description' => 'required|min:10',
+        ]);
+
+        return view('posts.confirm', [
+            'title' => $validated['title'],
+            'description' => $validated['description']
+        ]);
     }
 
     public function store(Request $request)
     {
-        // Validate the incoming request
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-        ], [
-            'title.required' => 'Title cannot be blank.',
-            'description.required' => 'Description cannot be blank.',
-            'title.max' => 'The title cannot exceed 255 characters.',
-            'description.string' => 'Description must be a valid string.',
-        ]);
 
-        // Temporarily store data in variables (instead of session)
-        $title = $request->input('title');
-        $description = $request->input('description');
-
-        return redirect()->route('posts.confirm', compact('title', 'description'));
-    }
-    public function confirm(Request $request)
-    {
-        $title = $request->input('title');
-        $description = $request->input('description');
-
-        return view('posts.confirm', compact('title', 'description'));
-    }
-
-    public function storeFinal(Request $request)
-    {
         $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
+            'title' => 'required|max:255|unique:posts,title',
+            'description' => 'required|min:10',
         ]);
 
-        // Create the post
         Post::create([
             'title' => $validated['title'],
             'description' => $validated['description'],
-            'create_user_id' => Auth::id(),
-            'updated_user_id' => Auth::id(),
+            'create_user_id' => auth()->user()->id,
+            'updated_user_id' => auth()->id(),
+
         ]);
 
-        return redirect()->route('posts.index');
+        return redirect()->route('posts.index')->with('success', 'Post created successfully!');
     }
 
     public function edit($id)
     {
-        // Find the post by ID or fail if not found
-        $post = Post::findOrFail($id);
-
-        // Return the edit view with the post data
+        $post = Post::find($id);
         return view('posts.edit', compact('post'));
     }
-
-    public function update(Request $request, $id)
+    public function confirmEdit(Request $request, $id)
     {
+        $message = [
+            'title.required' => 'Title cannot be blank.',
+            'descripton.required' => 'Description cannot be blank',
+            'description.max' => 'The description should not exceed 500 characters.',
+        ];
+
         $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'status' => 'nullable|boolean', 
-        ]);
+            'title' => 'required|string|max:255|unique:posts,title,' . $id,
+            'description' => 'required|string|max:255',
+            'status' => 'nullable|boolean',
+        ], $message);
 
         $post = Post::findOrFail($id);
 
-        // Update post with the new title, description, and status
-        $post->title = $validated['title'];
-        $post->description = $validated['description'];
-        $post->status = $request->has('status') ? 1 : 0; 
-        $post->updated_user_id = Auth::id();
+        $status = $request->has('status') ? 1 : 0;
+        $post->title = $request->input('title');
+        $post->description = $request->input('description');
+        $post->status = $status;
+
+        return view('posts.confirm-edit', compact('post'));
+    }
+    public function update(Request $request, $id)
+    {
+
+        $post = Post::findOrFail($id);
+        $status = $request->has('status') ? 1 : 0;
+        $post->title = $request->input('title');
+        $post->description = $request->input('description');
+        $post->status = $status;
         $post->save();
 
-        return redirect()->route('posts.index')->with('success', 'Post updated successfully!');
+        return redirect()->route('posts.index')->with('success', 'Post updated successfully');
     }
 
+    public function destroy($id)
+    {
 
+        $post = Post::findOrFail($id);
 
+        $post->delete();
 
-
+        return redirect()->route('posts.index')->with('success', 'Post deleted successfully.');
+    }
 
     public function show($id)
     {
-        // Retrieve the post by ID or fail if not found
         $post = Post::findOrFail($id);
-
-        // Return the view and pass the post data
         return view('posts.show', compact('post'));
     }
 
