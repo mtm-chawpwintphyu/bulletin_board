@@ -6,3 +6,7 @@ import './deletepost';
 
 import './detailpost';
 
+import './deleteuser';
+
+import './detailuser';
+

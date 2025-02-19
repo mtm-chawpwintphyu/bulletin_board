@@ -7,7 +7,7 @@
             {{ __('Create Post') }}
         </div>
         <div class="card-body">
-            <form action="{{ route('posts.confirm') }}" method="POST">
+            <form action="{{ route('confirm') }}" method="POST">
                 @csrf
                 <div class="row mb-3">
                     <label for="title" class="col-md-4 col-form-label text-md-end">Title</label>

@@ -9,20 +9,26 @@ class Post extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'title', 'description', 'create_user_id', 'updated_user_id',
-    ];
+    protected $fillable = ['title', 'description', 'status', 'create_user_id', 'updated_user_id', 'created_at', 'updated_at'];
+
+    protected $dates = ['created_at', 'updated_at'];
+
+    public $timestamps = true;
+
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function creator() {
+    public function creator()
+    {
         return $this->belongsTo(User::class, 'create_user_id');
-    } 
+    }
     public function updater()
-{
-    return $this->belongsTo(User::class, 'updated_user_id');
-}  
-    
+    {
+        return $this->belongsTo(User::class, 'updated_user_id');
+    }
 }
+
+
+

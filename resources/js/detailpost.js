@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('modalPostDescription').textContent = postDescription;
             const statusText = postStatus == 1 ? 'Active' : 'Inactive';
             document.getElementById('modalPostStatus').textContent = statusText;
+            document.getElementById('modalPostStatus').style.color = postStatus == 1 ? 'green' : 'red';
             document.getElementById('modalPostCreatedBy').textContent = postCreatedBy;
             document.getElementById('modalPostCreatedAt').textContent = postCreatedAt;
             document.getElementById('modalPostUpdatedBy').textContent = postUpdatedBy;

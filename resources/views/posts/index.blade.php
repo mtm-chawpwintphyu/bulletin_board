@@ -23,9 +23,12 @@
                     </form>
 
                     <div class="d-flex align-items-center py-3 justify-content-end" style="gap: 1rem;">
-                        <a href="{{ route('posts.create') }}" class="btn btn-primary" method="GET">Create</a>
-                        <button type="button" class="btn btn-success">Upload</button>
-                        <button type="button" class="btn btn-info">Download</button>
+                        <a href="{{ route('create') }}" class="btn btn-primary" method="GET">Create</a>
+
+                    <a href="{{ route('importcsv') }}" class="btn btn-success">Upload</a>
+
+                    <a href="{{ route('download') }}" class="btn btn-info">Download</a>
+
                     </div>
 
                     <table class="table table-striped table-hover">
@@ -74,7 +77,6 @@
                             @endforelse
                         </tbody>
                     </table>
-
                     <div class="d-flex justify-content-between">
                         <div>
                             Showing {{ $posts->firstItem() }} to {{ $posts->lastItem() }} of {{ $posts->total() }}

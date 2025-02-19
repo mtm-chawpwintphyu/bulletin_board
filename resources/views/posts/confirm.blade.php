@@ -26,7 +26,7 @@
 
                 <div class="d-flex justify-content-center mt-3">
                     <button type="submit" class="btn btn-success me-2">Confirm Post</button>
-                    <a href="{{ route('posts.create', ['title' => $title, 'description' => $description]) }}"
+                    <a href="{{ route('create', ['title' => $title, 'description' => $description]) }}"
                         class="btn btn-secondary">Cancel</a>
                 </div>
             </form>

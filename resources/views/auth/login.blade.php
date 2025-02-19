@@ -8,7 +8,6 @@
                 <div class="card-header bg-success">{{ __('Login') }}</div>
 
                 <div class="card-body">
-                    <!-- Display alert message if there are any errors -->
                     @if ($errors->has('error'))
                         <div class="alert alert-danger">
                             <ul>
@@ -25,8 +24,7 @@
 
                             <div class="col-md-6">
                                 <input id="email" class="form-control @error('email') is-invalid @enderror" name="email"
-                                    value="{{ old('email') }}" autocomplete="email" max="50" autofocus>
-
+                                    value="{{ old('email') }}" autocomplete="off" max="50" autofocus>
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -42,7 +40,7 @@
                             <div class="col-md-6">
                                 <input id="password" type="password"
                                     class="form-control @error('password') is-invalid @enderror" name="password"
-                                    value="{{ old('password') }}" autocomplete="current-password" min="6" max="20">
+                                    value="{{ old('password') }}" autocomplete="off" min="6" max="20">
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -51,7 +49,6 @@
                                 @enderror
                             </div>
                         </div>
-
                         <div class="row mb-3">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-success form-control">
@@ -59,7 +56,6 @@
                                 </button>
                             </div>
                         </div>
-
                         <div class="row mb-3">
                             <div class="col-md-6 offset-md-4">
                                 <div class="form-check">
@@ -76,9 +72,6 @@
                                 @endif
                             </div>
                         </div>
-
-
-
                 </div>
             </div>
             </form>
