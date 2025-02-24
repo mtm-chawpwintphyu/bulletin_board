@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const userUpdatedUserId = button.getAttribute('data-user-updated-user-id');
                 const userProfile = button.getAttribute('data-user-profile');
 
+                console.log(userProfile);
                 document.getElementById('modalUserId').textContent = userId;
                 document.getElementById('modalUserName').textContent = userName;
                 document.getElementById('modalUserEmail').textContent = userEmail;
@@ -31,18 +32,18 @@ document.addEventListener('DOMContentLoaded', function () {
                 document.getElementById('modalUserCreatedAt').textContent = userCreatedAt;
                 document.getElementById('modalUserUpdatedAt').textContent = userUpdatedAt;
                 document.getElementById('modalUserCreatedUser').textContent = userCreatedUser;
-                document.getElementById('modalUserUpdatedUser').textContent = userUpdatedUser;
 
                 if (userUpdatedUserId == 1) {
                     document.getElementById('modalUserUpdatedUser').textContent = 'Admin';
                 } else {
                     document.getElementById('modalUserUpdatedUser').textContent = userUpdatedUser;
                 }
-                const imagePath = `http://localhost:8000/storage/${user.profile}`;
-                console.log(imagePath); 
 
-                document.getElementById('modalUserProfile').innerHTML =
-                    userProfile ? `<img src="${userProfile}" alt="Profile Picture" class="img-fluid" />` : 'No profile available.';
+                const profileImage = userProfile
+                    ? `<img src="${userProfile}" alt="Profile Picture" class="img-fluid" />`
+                    : "No profile available.";
+
+                document.getElementById('modalUserProfile').innerHTML = profileImage;
             }
         });
     }

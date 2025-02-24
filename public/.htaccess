@@ -23,3 +23,10 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 </IfModule>
+
+<Directory "D:/laravel_training/bulltinboard/storage">
+    AllowOverride All
+    Order Allow,Deny
+    Allow from all
+</Directory>
+

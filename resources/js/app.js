@@ -10,3 +10,4 @@ import './deleteuser';
 
 import './detailuser';
 
+import './userclearbtn';

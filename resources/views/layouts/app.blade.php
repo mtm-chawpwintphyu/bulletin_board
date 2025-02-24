@@ -34,7 +34,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/home') }}">
+                <a class="navbar-brand" href="{{ url('/posts') }}">
                     {{ config('Bulletin_Board', 'Bulletin_Board') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -75,7 +75,6 @@
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
-
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
@@ -88,15 +87,13 @@
                                     </svg>
                                 </a>
 
-
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <!-- Profile link -->
                                     <li><a class="dropdown-item" href="{{ route('profile') }}">{{ __('Profile') }}</a></li>
                                     <!-- Logout link -->
                                     <li>
-                                        <a class="dropdown-item" href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                                                       document.getElementById('logout-form').submit();">
+                                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                            document.getElementById('logout-form').submit();">
                                             {{ __('Logout') }}
                                         </a>
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST"

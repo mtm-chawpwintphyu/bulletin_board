@@ -10,7 +10,6 @@
                 <form action="{{ route('users.update', $user->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
-
                     <div class="row mb-3">
                         <div class="d-flex align-items-center">
                             <label for="name" class="col-md-4 col-form-label text-md-end">Name <sup
@@ -18,7 +17,7 @@
                             <div class="col-md-5 ms-3">
                                 <input type="text" name="name" id="name"
                                     class="form-control @error('name') is-invalid @enderror"
-                                    value="{{ old('name',  $user->name) }}">
+                                    value="{{ old('name', $user->name) }}">
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -109,7 +108,7 @@
                             <label for="profile_picture" class="col-md-4 col-form-label text-md-end">Old Profile</label>
                             <div class="col-md-5 ms-3">
                                 @if($user->profile)
-                                    <img src="{{ asset('storage/' . $user->profile) }}" alt="Profile Picture" width="100">
+                                    <img src="{{ asset('storage/' . $user->profile) }}" alt="Profile Picture" width="100" name="old-profile-img" id="old-profile-img">
                                 @else
                                     <p>No profile picture uploaded</p>
                                 @endif
@@ -134,17 +133,11 @@
                     <div class="d-flex justify-content-center">
                         <button type="submit" class="btn btn-success">Save Changes</button>
                         <button type="button" id="reset-btn" class="btn btn-secondary ms-2">Clear</button>
-                        <a href="{{ route('users.password', ['id' => $user->id]) }}" class="ms-3 p-2 text-decoration-none">Change Password</a>
+                        <a href="{{ route('users.password', ['id' => $user->id]) }}"
+                            class="ms-3 p-2 text-decoration-none">Change Password</a>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-
-    <script>
-        document.getElementById('reset-btn').addEventListener('click', function () {
-            let form = this.closest('form');
-            form.reset();
-        });
-    </script>
 @endsection

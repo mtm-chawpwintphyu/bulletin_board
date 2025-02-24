@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
 
 
 Route::get('/', function () {
@@ -14,7 +15,8 @@ Auth::routes();
 Route::middleware('auth')->group(function () {
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    Route::resource('users', UserController::class);
+    // Route::resource('users', UserController::class);
+    Route::get('/users', [UserController::class, 'index'])->name('users.index');
     Route::get('profile', [UserController::class, 'profile'])->name('profile');
     Route::get('users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
     Route::put('users/{user}', [UserController::class, 'update'])->name('users.update');
@@ -23,13 +25,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/users/confirm', [UserController::class, 'confirm'])->name('users.confirm');
     Route::post('/users/store', [UserController::class, 'store'])->name('users.store');
     Route::delete('/users/{user}', [UserController::class, 'destroy']);
-    // Route::get('/change-password', [UserController::class, 'showPasswordForm'])->name('users.password');
     Route::get('users/{id}/change-password', [UserController::class, 'showPasswordForm'])->name('users.password');
     Route::post('/users/{id}/update-password', [UserController::class, 'updatePassword'])->name('users.updatePassword');
-
-
-    // Route::post('/update-password', [UserController::class, 'updatePassword'])->name('users.updatePassword');
-
 
     Route::resource('posts', PostController::class)->except(['index', 'create', 'edit']);
     Route::get('/importcsv', [PostController::class, 'importcsv'])->name('importcsv');
