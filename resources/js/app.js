@@ -11,3 +11,5 @@ import './deleteuser';
 import './detailuser';
 
 import './userclearbtn';
+
+import '../sass/app.scss';

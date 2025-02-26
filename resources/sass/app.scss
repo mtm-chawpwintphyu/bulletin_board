@@ -6,3 +6,26 @@
 
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
+
+$footer-spacing: 60px;
+
+html,
+body {
+    margin: 0;
+    height: 100%;
+}
+
+#app {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+
+    main.py-4 {
+        flex: 1;
+        padding-bottom: $footer-spacing;
+    }
+    .bg-white.text-success.py-3.shadow-sm {
+        margin-top: auto;
+    }
+}
+

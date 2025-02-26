@@ -34,15 +34,11 @@ class LoginController extends Controller
             'password.min' => 'Password must be at least 6 characters.',
         ];
 
-
-
-        // Validation rules
         $validated = $request->validate([
             'email' => 'required|email|max:50',
             'password' => 'required|min:6',
         ], $messages);
 
-        // Check if the user exists
         $user = User::where('email', $request->email)->first();
 
         if (!$user) {
@@ -52,7 +48,7 @@ class LoginController extends Controller
             ]);
         }
 
-        // Check if the password is correct
+
         if (!Hash::check($request->password, $user->password)) {
 
             return back()->withErrors([
@@ -60,19 +56,14 @@ class LoginController extends Controller
             ]);
         }
 
-        // If email and password are correct, attempt to log the user in
         Auth::login($user);
 
-
-        // Attempt to log the user in
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password], $request->filled('remember'))) {
-            // Authentication passed, redirect to intended page
-            return redirect()->intended('/home');
+     
+            return redirect()->intended('/users');
         }
 
     }
-
-
     use AuthenticatesUsers;
 
     /**
@@ -80,7 +71,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/login';
 
     /**
      * Create a new controller instance.

@@ -19,7 +19,6 @@ document.addEventListener('DOMContentLoaded', function () {
         let oldProfileMsg = document.getElementById('old-profile-msg');
         
         if (oldProfileImg) {
-         
             oldProfileImg.src = '';  
             oldProfileImg.alt = 'No profile picture uploaded'; 
         }

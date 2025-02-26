@@ -4,18 +4,22 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\TestMailController;
+use Illuminate\Support\Facades\Mail;
 
 
 Route::get('/', function () {
-    return view('layouts.app');
+    return view('auth.login');
 });
 
 Auth::routes();
 
+Route::get('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+Route::get('password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+
 Route::middleware('auth')->group(function () {
 
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    // Route::resource('users', UserController::class);
+    Route::get('/users', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
     Route::get('profile', [UserController::class, 'profile'])->name('profile');
     Route::get('users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
