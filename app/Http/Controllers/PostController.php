@@ -115,11 +115,10 @@ class PostController extends Controller
         $message = [
             'title.required' => 'Title cannot be blank.',
             'descripton.required' => 'Description cannot be blank',
-            'description.max' => 'The description should not exceed 500 characters.',
         ];
         $validated = $request->validate([
-            'title' => 'required|string|max:255|unique:posts,title,' . $id,
-            'description' => 'required|string|max:255',
+            'title' => 'required|string|unique:posts,title,' . $id,
+            'description' => 'required|string',
             'status' => 'nullable|boolean',
         ], $message);
         $post = Post::findOrFail($id);

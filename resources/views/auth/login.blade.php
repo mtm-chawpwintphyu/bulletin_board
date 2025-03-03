@@ -42,7 +42,7 @@
                                         class="form-control @error('password') is-invalid @enderror" name="password"
                                         value="{{ old('password') }}" autocomplete="off" min="6" max="20">
                                     <span id="toggle-password" class="position-absolute"
-                                        style="top: 15px; right: 10px; cursor: pointer;">
+                                        style="top: 10px; right: 20px; cursor: pointer;">
                                         <i class="fa fa-eye-slash" id="eye-icon"></i>
                                     </span>
 
