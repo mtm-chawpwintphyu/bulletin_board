@@ -240,7 +240,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Are you sure to delete user?</p>
+                    <p id="confirmationText">Are you sure you want to delete this user?</p>
                     <div class="row mb-3">
                         <div class="col-4"><strong>ID:</strong></div>
                         <div class="col-8"><span id="deleteUserId" class="text-danger"></span></div>
@@ -275,8 +275,8 @@
                     <form id="deleteUserForm" action="" method="POST" style="display: inline;">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </form>
+                        <input type="hidden" id="currentUserId" value="{{ auth()->id() }}">
+                        <button type="submit" id="deleteButton" class="btn btn-danger">Delete</button>
                 </div>
             </div>
         </div>

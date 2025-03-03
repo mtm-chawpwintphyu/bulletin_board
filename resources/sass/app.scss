@@ -24,8 +24,45 @@ body {
         flex: 1;
         padding-bottom: $footer-spacing;
     }
+
     .bg-white.text-success.py-3.shadow-sm {
         margin-top: auto;
     }
 }
 
+.modal-backdrop {
+    background-color: transparent !important;
+}
+
+.modal-backdrop {
+    background-color: rgba(255, 255, 255, 0.5) !important; // Light backdrop
+}
+
+.modal-content {
+    background-color: #fff !important;
+    border-radius: 0.375rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.description-column {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 250px;
+}
+
+#modalPostDescription {
+    display: block;
+    max-height: 4.5em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#postDescription {
+    display: block;
+    max-height: 4.5em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

@@ -13,3 +13,8 @@ import './detailuser';
 import './userclearbtn';
 
 import '../sass/app.scss';
+
+import './togglepassword';
+
+import './eyetoggle';
+

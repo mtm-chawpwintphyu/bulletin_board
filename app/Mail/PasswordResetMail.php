@@ -13,14 +13,12 @@ class PasswordResetMail extends Mailable
     public $resetUrl;
     public $userName;
     public $userEmail;
-
     public function __construct($resetUrl, $userName, $userEmail)
     {
         $this->resetUrl = $resetUrl;
         $this->userName = $userName;
         $this->userEmail = $userEmail;
     }
-
     public function build()
     {
         return $this->view('auth.passwords.passwordreset')

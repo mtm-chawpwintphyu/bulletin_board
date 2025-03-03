@@ -12,7 +12,11 @@
                         <form action="{{ route('posts.confirm-edit', $post->id) }}" method="GET">
                             @csrf
                             @method('GET')
-
+                            @if(session('error'))
+                                <div class="alert alert-danger">
+                                    {{ session('error') }}
+                                </div>
+                            @endif
                             <div class="row mb-3">
                                 <label for="title" class="col-md-4 col-form-label text-md-end">Title</label>
                                 <div class="col-md-6">
@@ -24,7 +28,6 @@
                                     @enderror
                                 </div>
                             </div>
-
                             <div class="row mb-3">
                                 <label for="description" class="col-md-4 col-form-label text-md-end">Description</label>
                                 <div class="col-md-6">
@@ -36,20 +39,18 @@
                                     @enderror
                                 </div>
                             </div>
-
                             <div class="row mb-3">
                                 <label for="status" class="col-md-4 col-form-label text-md-end">Status</label>
                                 <div class="col-md-6">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" name="status" id="status" value="1"
-                                            {{ $post->status == 1 ? 'checked' : '' }}>
+                                            {{ $post->status == 1 ? 'checked' : '' }} readonly>
                                     </div>
                                     @error('status')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                             </div>
-
                             <div class="row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-success">Edit</button>

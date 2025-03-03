@@ -56,7 +56,7 @@
                                             {{ $post->title }}
                                         </a>
                                     </td>
-                                    <td>{{ $post->description }}</td>
+                                    <td class="description-column">{{ $post->description }}</td>
                                     <td>{{ $post->creator->name ?? 'Unknown' }}</td>
                                     <td>{{ $post->created_at->format('d M, Y') }}</td>
                                     <td>
@@ -121,14 +121,16 @@
     </div>
 </div>
 
-<!-- delete modal -->
+<!-- Delete Confirmation Modal -->
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content rounded-3 shadow-lg">
+            <!-- Modal Header -->
             <div class="modal-header bg-danger text-white">
                 <h5 class="modal-title" id="deleteModalLabel">Delete Confirmation</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            <!-- Modal Body -->
             <div class="modal-body">
                 <p class="lead">Are you sure to delete the post?</p>
                 <div class="row mb-3">
@@ -148,6 +150,7 @@
                     <div class="col-8"><span id="postStatus" class="text-danger"></span></div>
                 </div>
             </div>
+            <!-- Modal Footer -->
             <div class="modal-footer">
                 <form id="deleteForm" action="" method="POST">
                     @csrf
@@ -159,6 +162,7 @@
         </div>
     </div>
 </div>
+
 
 <!-- Post Details Modal -->
 <div class="modal fade" id="postDetailsModal" tabindex="-1" aria-labelledby="postDetailsModalLabel" aria-hidden="true">
@@ -178,8 +182,10 @@
                     <div class="col-8"><span id="modalPostTitle" class="text-danger"></span></div>
                 </div>
                 <div class="row mb-3">
-                    <div class="col-4"><strong>Description:</strong></div>
-                    <div class="col-8"><span id="modalPostDescription" class="text-danger"></span></div>
+                <div class="col-4"><strong>Description:</strong></div>
+                <div class="col-8">
+                <span id="modalPostDescription" class="text-danger modal-description-column"></span>
+                </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-4"><strong>Status:</strong></div>

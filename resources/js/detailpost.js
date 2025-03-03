@@ -13,7 +13,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
             document.getElementById('modalPostId').textContent = postId;
             document.getElementById('modalPostTitle').textContent = postTitle;
-            document.getElementById('modalPostDescription').textContent = postDescription;
+
+            const truncatedDescription = truncateDescription(postDescription, 100);
+            document.getElementById('modalPostDescription').textContent = truncatedDescription;
+
             const statusText = postStatus == 1 ? 'Active' : 'Inactive';
             document.getElementById('modalPostStatus').textContent = statusText;
             document.getElementById('modalPostStatus').style.color = postStatus == 1 ? 'green' : 'red';
@@ -27,3 +30,12 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+
+// Function to truncate description to n words
+function truncateDescription(description, wordLimit) {
+    const words = description.split(' ');
+    if (words.length > wordLimit) {
+        return words.slice(0, wordLimit).join(' ') + '...';
+    }
+    return description;
+}

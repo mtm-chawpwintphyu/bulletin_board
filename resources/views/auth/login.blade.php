@@ -37,11 +37,13 @@
                             <label for="password"
                                 class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
 
-                            <div class="col-md-6">
+                            <div class="col-md-6 position-relative">
                                 <input id="password" type="password"
                                     class="form-control @error('password') is-invalid @enderror" name="password"
                                     value="{{ old('password') }}" autocomplete="off" min="6" max="20">
-
+                                <span id="toggle-password" class="position-absolute" style="top: 15px; right: 10px; cursor: pointer;">
+                                    <i class="fa fa-eye-slash" id="eye-icon"></i>
+                                </span>
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -49,6 +51,7 @@
                                 @enderror
                             </div>
                         </div>
+
                         <div class="row mb-3">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-success form-control">
@@ -56,6 +59,7 @@
                                 </button>
                             </div>
                         </div>
+
                         <div class="row mb-3">
                             <div class="col-md-6 offset-md-4">
                                 <div class="form-check">
@@ -72,12 +76,10 @@
                                 @endif
                             </div>
                         </div>
+                    </form>
                 </div>
             </div>
-            </form>
         </div>
     </div>
-</div>
-</div>
 </div>
 @endsection

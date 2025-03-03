@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     const deleteConfirmationModal = document.getElementById('deleteConfirmationModal');
     const deleteUserForm = document.getElementById('deleteUserForm');
-    
+
     const deleteUserId = document.getElementById('deleteUserId');
     const deleteUserName = document.getElementById('deleteUserName');
     const deleteUserEmail = document.getElementById('deleteUserEmail');
@@ -11,10 +11,19 @@ document.addEventListener('DOMContentLoaded', function () {
     const deleteUserType = document.getElementById('deleteUserType');
 
     const deleteButtons = document.querySelectorAll('.delete-button');
-    
+    const currentUserId = document.getElementById('currentUserId').value;
+
     deleteButtons.forEach(function (button) {
+        const userId = button.getAttribute('data-user-id');
+        if (userId === currentUserId) {
+            button.disabled = true; 
+            button.title = "You cannot delete the currently logged-in user";
+        }
         button.addEventListener('click', function (event) {
-            const userId = button.getAttribute('data-user-id');
+            if (userId === currentUserId) {
+                alert("You cannot delete the currently logged-in user.");
+                return;
+            }
             const userName = button.getAttribute('data-user-name');
             const userEmail = button.getAttribute('data-user-email');
             const userPhone = button.getAttribute('data-user-phone');
