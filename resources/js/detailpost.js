@@ -1,7 +1,8 @@
+import './bootstrap';
+
 document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('.post-title').forEach(function (element) {
         element.addEventListener('click', function (event) {
-
             const postId = event.target.getAttribute('data-post-id');
             const postTitle = event.target.getAttribute('data-post-title');
             const postDescription = event.target.getAttribute('data-post-description');
@@ -31,7 +32,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-// Function to truncate description to n words
 function truncateDescription(description, wordLimit) {
     const words = description.split(' ');
     if (words.length > wordLimit) {

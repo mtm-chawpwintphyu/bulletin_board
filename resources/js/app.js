@@ -1,17 +1,12 @@
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import '@fortawesome/fontawesome-free/js/all.min.js';
+import 'bootstrap';
 import './bootstrap';
-
 import './editpost';
-
 import './deletepost';
-
 import './detailpost';
-
 import './deleteuser';
-
 import './detailuser';
-
 import './userclearbtn';
-
 import '../sass/app.scss';
-
 import './togglepassword';

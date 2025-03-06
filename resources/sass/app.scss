@@ -1,12 +1,13 @@
 // Fonts
 @import url('https://fonts.bunny.net/css?family=Nunito');
-
 // Variables
 @import 'variables';
-
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
-
+/* Import Bootstrap CSS */
+@import 'bootstrap/dist/css/bootstrap.min.css';
+/* Import Font Awesome CSS */
+@import '@fortawesome/fontawesome-free/css/all.min.css';
 $footer-spacing: 60px;
 
 html,
@@ -35,7 +36,7 @@ body {
 }
 
 .modal-backdrop {
-    background-color: rgba(255, 255, 255, 0.5) !important; // Light backdrop
+    background-color: rgba(255, 255, 255, 0.5) !important;
 }
 
 .modal-content {
@@ -60,6 +61,29 @@ body {
 }
 
 #postDescription {
+    display: block;
+    max-height: 4.5em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.title-column {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 250px;
+}
+
+#modalPostTitle {
+    display: block;
+    max-height: 4.5em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#postTitle {
     display: block;
     max-height: 4.5em;
     overflow: hidden;

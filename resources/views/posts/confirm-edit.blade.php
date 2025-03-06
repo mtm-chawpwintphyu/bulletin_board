@@ -42,7 +42,7 @@
                             <div class="row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-success">Confirm Edit</button>
-                                    <a href="{{ route('posts.edit') }}"
+                                    <a href="{{ route('posts.create') }}"
                                         class="btn btn-secondary">Cancel</a>
                                 </div>
                             </div>

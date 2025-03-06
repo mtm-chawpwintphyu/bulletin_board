@@ -60,7 +60,7 @@ class LoginController extends Controller
 
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password], $request->filled('remember'))) {
      
-            return redirect()->intended('/users');
+            return redirect()->intended('/posts');
         }
 
     }

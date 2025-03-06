@@ -33,7 +33,7 @@
 
                     <table class="table table-striped table-hover">
                         <thead>
-                            <tr class="table-success text-white">
+                            <tr class="table-success text-black">
                                 <th>Post Title</th>
                                 <th>Post Description</th>
                                 <th>Posted User</th>
@@ -44,7 +44,7 @@
                         <tbody class="table-group-divider">
                             @forelse ($posts as $post)
                                 <tr>
-                                    <td>
+                                    <td class="title-column">
                                         <a href="javascript:void(0);" class="post-title text-decoration-none" data-post-id="{{ $post->id }}"
                                             data-post-title="{{ $post->title }}"
                                             data-post-description="{{ $post->description }}"

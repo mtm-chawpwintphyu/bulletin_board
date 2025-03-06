@@ -56,7 +56,7 @@
                         <div class="table-responsive">
                             <table class="table table-striped table-hover">
                                 <thead>
-                                    <tr class="table-success text-white">
+                                    <tr class="table-success text-black">
                                         <th>No</th>
                                         <th>Name</th>
                                         <th>Email</th>

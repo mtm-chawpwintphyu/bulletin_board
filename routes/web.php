@@ -33,6 +33,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/users/{id}/update-password', [UserController::class, 'updatePassword'])->name('users.updatePassword');
 
     Route::resource('posts', PostController::class)->except(['index', 'create', 'edit']);
+    Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
     Route::get('/importcsv', [PostController::class, 'importcsv'])->name('importcsv');
     Route::post('/upload', [PostController::class, 'upload'])->name('upload');
     Route::get('download', [PostController::class, 'download'])->name('download');
