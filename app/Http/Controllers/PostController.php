@@ -141,7 +141,7 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         $post = Post::findOrFail($id);
-        $status = $request->input('status');
+        $status = $request->has('status') ? 1 : 0;
         $post->title = $request->input('title');
         $post->description = $request->input('description');
         $post->status = $status;
